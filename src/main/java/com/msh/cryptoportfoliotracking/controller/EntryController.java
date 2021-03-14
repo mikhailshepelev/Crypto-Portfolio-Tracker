@@ -1,5 +1,6 @@
 package com.msh.cryptoportfoliotracking.controller;
 
+import com.msh.cryptoportfoliotracking.dto.CryptoEntryRequest;
 import com.msh.cryptoportfoliotracking.model.CryptoEntry;
 import com.msh.cryptoportfoliotracking.service.CryptoEntryService;
 import com.msh.cryptoportfoliotracking.service.CryptoEntryServiceImpl;
@@ -41,5 +42,11 @@ public class EntryController {
         }
         cryptoEntryService.deleteById(cryptoentryId);
         return "Deleted entry with id - " + cryptoentryId;
+    }
+
+    @PostMapping("/cryptoentries")
+    public List<CryptoEntry> addCryptoEntry(@RequestBody CryptoEntryRequest request){
+        cryptoEntryService.addCryptoEntry(request);
+        return cryptoEntryService.findAll();
     }
 }

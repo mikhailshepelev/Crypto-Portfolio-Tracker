@@ -1,6 +1,8 @@
 package com.msh.cryptoportfoliotracking.service;
 
+import com.msh.cryptoportfoliotracking.dto.CryptoEntryRequest;
 import com.msh.cryptoportfoliotracking.model.CryptoEntry;
+import com.msh.cryptoportfoliotracking.model.CryptoCurrency;
 import com.msh.cryptoportfoliotracking.repository.CryptoEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +40,17 @@ public class CryptoEntryServiceImpl implements CryptoEntryService {
     @Override
     public void deleteById(int id) {
         cryptoEntryRepository.deleteById(id);
+    }
+
+    @Override
+    public void addCryptoEntry(CryptoEntryRequest request) {
+
+        CryptoCurrency cryptoCurrency =  CryptoCurrency.valueOf(request.getCryptocurrencyName().toUpperCase());
+        double currentMarketValue = bitfinexService.getCurrentMarketValue(cryptoCurrency.getSymbol());
+
+        CryptoEntry cryptoEntry = new CryptoEntry(cryptoCurrency, request.getAmountPurchased(),
+                                                    request.getWalletLocation(), currentMarketValue);
+
+        cryptoEntryRepository.save(cryptoEntry);
     }
 }
