@@ -38,7 +38,7 @@ public class EntryController {
     public String deleteCryptoEntry(@PathVariable int cryptoentryId){
         CryptoEntry cryptoEntry = cryptoEntryService.findById(cryptoentryId);
         if (cryptoEntry == null) {
-            throw new RuntimeException("Employee not found with id - " + cryptoentryId);
+            throw new RuntimeException("Entry not found with id - " + cryptoentryId);
         }
         cryptoEntryService.deleteById(cryptoentryId);
         return "Deleted entry with id - " + cryptoentryId;

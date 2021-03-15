@@ -18,13 +18,11 @@ public class BitfinexServiceImpl implements BitfinexService {
 
     public double getCurrentMarketValue(String symbol) {
 
-        Object[] object = restTemplate.getForObject(
-                apiUrl + symbol, Object[].class);
+        String[] object = restTemplate.getForObject(
+                apiUrl + symbol, String[].class);
 
         assert object != null;
         TickerDto tickerDto = TickerDto.CreateTickerDtoFromObjectArray(object);
-
-        System.out.println(tickerDto.getBid());
 
         return tickerDto.getBid();
     }
