@@ -2,7 +2,14 @@ package com.msh.cryptoportfoliotracking.model;
 
 
 public enum CryptoCurrency {
-    BITCOIN("tBTCEUR");
+
+    BITCOIN("tBTCEUR"),
+    EOS("tEOSEUR"),
+    ETHEREUM("tETHEUR"),
+    PARKINGO("tGOTEUR"),
+    IOTA("tIOTEUR"),
+    NEO("tNEOEUR"),
+    TRON("tTRXEUR");
 
     String symbol;
 

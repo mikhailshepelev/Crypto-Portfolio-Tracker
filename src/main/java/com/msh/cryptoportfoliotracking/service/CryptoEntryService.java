@@ -11,4 +11,5 @@ public interface CryptoEntryService {
     CryptoEntry findById(int id);
     void deleteById(int id);
     void addCryptoEntry(CryptoEntryRequest request);
+    void updateCryptoEntry(CryptoEntry cryptoEntry);
 }

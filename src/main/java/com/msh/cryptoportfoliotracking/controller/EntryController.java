@@ -49,4 +49,10 @@ public class EntryController {
         cryptoEntryService.addCryptoEntry(request);
         return cryptoEntryService.findAll();
     }
+
+    @PutMapping("/cryptoentries")
+    public CryptoEntry updateCryptoEntry(@RequestBody CryptoEntry cryptoEntry){
+        cryptoEntryService.updateCryptoEntry(cryptoEntry);
+        return cryptoEntry;
+    }
 }

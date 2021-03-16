@@ -45,11 +45,19 @@ public class CryptoEntryServiceImpl implements CryptoEntryService {
     @Override
     public void addCryptoEntry(CryptoEntryRequest request) {
 
-        CryptoCurrency cryptoCurrency =  CryptoCurrency.valueOf(request.getCryptocurrencyName().toUpperCase());
+        CryptoCurrency cryptoCurrency =  CryptoCurrency.valueOf(request.getCryptocurrency().toUpperCase());
         double currentMarketValue = bitfinexService.getCurrentMarketValue(cryptoCurrency.getSymbol());
 
-        CryptoEntry cryptoEntry = new CryptoEntry(cryptoCurrency, request.getAmountPurchased(),
+        CryptoEntry cryptoEntry = new CryptoEntry(cryptoCurrency, request.getAmount(),
                                                     request.getWalletLocation(), currentMarketValue);
+
+        cryptoEntryRepository.save(cryptoEntry);
+    }
+
+    @Override
+    public void updateCryptoEntry(CryptoEntry cryptoEntry) {
+        double currentMarketValue = bitfinexService.getCurrentMarketValue(cryptoEntry.getCryptocurrency().getSymbol());
+        cryptoEntry.setCurrentMarketValueEur(currentMarketValue);
 
         cryptoEntryRepository.save(cryptoEntry);
     }

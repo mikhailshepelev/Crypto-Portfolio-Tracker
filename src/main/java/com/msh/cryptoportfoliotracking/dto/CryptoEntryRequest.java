@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CryptoEntryRequest {
-    private String cryptocurrencyName;
-    private int amountPurchased;
+    private String cryptocurrency;
+    private int amount;
     private String walletLocation;
 }
