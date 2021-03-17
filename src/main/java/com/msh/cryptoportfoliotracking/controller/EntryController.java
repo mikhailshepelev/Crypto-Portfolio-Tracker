@@ -3,7 +3,6 @@ package com.msh.cryptoportfoliotracking.controller;
 import com.msh.cryptoportfoliotracking.dto.CryptoEntryRequest;
 import com.msh.cryptoportfoliotracking.model.CryptoEntry;
 import com.msh.cryptoportfoliotracking.service.CryptoEntryService;
-import com.msh.cryptoportfoliotracking.service.CryptoEntryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,12 +12,8 @@ import java.util.List;
 @RequestMapping("/api/cryptoentries")
 public class EntryController {
 
-    private CryptoEntryService cryptoEntryService;
-
     @Autowired
-    public EntryController(CryptoEntryServiceImpl cryptoEntryServiceImpl) {
-        this.cryptoEntryService = cryptoEntryServiceImpl;
-    }
+    private CryptoEntryService cryptoEntryService;
 
     @GetMapping
     public List<CryptoEntry> getAllCryptoEntries() throws Exception {
