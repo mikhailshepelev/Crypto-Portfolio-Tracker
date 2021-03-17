@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/cryptoentries")
 public class EntryController {
 
     private CryptoEntryService cryptoEntryService;
@@ -20,12 +20,12 @@ public class EntryController {
         this.cryptoEntryService = cryptoEntryServiceImpl;
     }
 
-    @GetMapping("/cryptoentries")
+    @GetMapping
     public List<CryptoEntry> getAllCryptoEntries() throws Exception {
         return cryptoEntryService.findAll();
     }
 
-    @GetMapping("/cryptoentries/{cryptoentryId}")
+    @GetMapping("/{cryptoentryId}")
     public CryptoEntry getCryptoEntry(@PathVariable int cryptoentryId){
         CryptoEntry cryptoEntry = cryptoEntryService.findById(cryptoentryId);
         if (cryptoEntry == null) {
@@ -34,7 +34,12 @@ public class EntryController {
         return cryptoEntry;
     }
 
-    @DeleteMapping("/cryptoentries/{cryptoentryId}")
+    @GetMapping("/totalamount")
+    public double getTotalAmountEur() {
+        return cryptoEntryService.getTotalAmountEur();
+    }
+
+    @DeleteMapping("/{cryptoentryId}")
     public String deleteCryptoEntry(@PathVariable int cryptoentryId){
         CryptoEntry cryptoEntry = cryptoEntryService.findById(cryptoentryId);
         if (cryptoEntry == null) {
@@ -44,13 +49,13 @@ public class EntryController {
         return "Deleted entry with id - " + cryptoentryId;
     }
 
-    @PostMapping("/cryptoentries")
+    @PostMapping
     public List<CryptoEntry> addCryptoEntry(@RequestBody CryptoEntryRequest request){
         cryptoEntryService.addCryptoEntry(request);
         return cryptoEntryService.findAll();
     }
 
-    @PutMapping("/cryptoentries")
+    @PutMapping
     public CryptoEntry updateCryptoEntry(@RequestBody CryptoEntry cryptoEntry){
         cryptoEntryService.updateCryptoEntry(cryptoEntry);
         return cryptoEntry;

@@ -1,8 +1,8 @@
 package com.msh.cryptoportfoliotracking.service;
 
 import com.msh.cryptoportfoliotracking.dto.CryptoEntryRequest;
-import com.msh.cryptoportfoliotracking.model.CryptoEntry;
 import com.msh.cryptoportfoliotracking.model.CryptoCurrency;
+import com.msh.cryptoportfoliotracking.model.CryptoEntry;
 import com.msh.cryptoportfoliotracking.repository.CryptoEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,5 +60,12 @@ public class CryptoEntryServiceImpl implements CryptoEntryService {
         cryptoEntry.setCurrentMarketValueEur(currentMarketValue);
 
         cryptoEntryRepository.save(cryptoEntry);
+    }
+
+    @Override
+    public double getTotalAmountEur() {
+        List<CryptoEntry> allCryptoEntries = cryptoEntryRepository.findAll();
+        return allCryptoEntries.stream()
+                .map(CryptoEntry::getCurrentMarketValueEur).mapToDouble(Double::doubleValue).sum();
     }
 }

@@ -12,4 +12,5 @@ public interface CryptoEntryService {
     void deleteById(int id);
     void addCryptoEntry(CryptoEntryRequest request);
     void updateCryptoEntry(CryptoEntry cryptoEntry);
+    double getTotalAmountEur();
 }
