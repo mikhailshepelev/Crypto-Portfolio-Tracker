@@ -17,6 +17,7 @@ public class TickerDto {
 
     public static TickerDto CreateTickerDtoFromObjectArray(String[] objects) {
         TickerDto tickerDto = new TickerDto();
+
         tickerDto.setBid(Double.parseDouble(objects[0]));
         tickerDto.setBidSize(Double.parseDouble(objects[1]));
         tickerDto.setAsk(Double.parseDouble(objects[2]));
